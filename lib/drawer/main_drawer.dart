@@ -19,7 +19,7 @@ class MainDrawer extends StatelessWidget {
               Navigator.pushNamed(context, routeNameAddBusPage);
             },
             leading: const Icon(Icons.bus_alert),
-            title: const Text('Add Bus'),
+            title: const Text('Add a Bus'),
           ),
           ListTile(
             onTap: () {
