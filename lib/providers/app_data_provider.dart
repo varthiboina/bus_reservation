@@ -1,6 +1,7 @@
 import 'package:bus_reservation_udemy/datasource/data_source.dart';
 import 'package:bus_reservation_udemy/datasource/dummy_data_source.dart';
 import 'package:bus_reservation_udemy/models/bus_model.dart';
+import 'package:bus_reservation_udemy/models/reservation_expansion_item.dart';
 import 'package:bus_reservation_udemy/models/response_model.dart';
 import 'package:flutter/material.dart';
 
@@ -72,5 +73,27 @@ class AppDataProvider extends ChangeNotifier {
       int scheduleId, String departureDate) {
     return _dataSource.getReservationsByScheduleAndDepartureDate(
         scheduleId, departureDate);
+  }
+
+  List<ReservationExpansionItem> getExpansionItems(
+      List<BusReservation> reservationList) {
+    return List.generate(reservationList.length, (index) {
+      final reservation = reservationList[index];
+      return ReservationExpansionItem(
+        header: ReservationExpansionHeader(
+          reservationId: reservation.reservationId,
+          departureDate: reservation.departureDate,
+          schedule: reservation.busSchedule,
+          timestamp: reservation.timestamp,
+          reservationStatus: reservation.reservationStatus,
+        ),
+        body: ReservationExpansionBody(
+          customer: reservation.customer,
+          totalSeatedBooked: reservation.totalSeatBooked,
+          seatNumbers: reservation.seatNumbers,
+          totalPrice: reservation.totalPrice,
+        ),
+      );
+    });
   }
 }
