@@ -8,6 +8,6 @@ class AppUser {
     this.id,
     required this.userName,
     required this.password,
-    this.role = 'Administratior',
+    this.role = 'Admin',
   });
 }
